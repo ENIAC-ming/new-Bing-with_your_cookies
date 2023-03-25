@@ -3,8 +3,8 @@ import json
 import asyncio
 import os
 from EdgeGPT import Chatbot, ConversationStyle
-export http_proxy="http://209.141.34.72:4001"
-export https_proxy="http://209.141.34.72:4001"
+os.environ["http_proxy"] = "http://209.141.34.72:4001"
+os.environ["https_proxy"] = "http://209.141.34.72:4001"
 async def get_model_reply(prompt,style,cookies,context=[]):
     # combines the new question with a previous context
     context += [prompt]
