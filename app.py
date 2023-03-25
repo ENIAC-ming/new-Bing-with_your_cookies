@@ -3,6 +3,8 @@ import json
 import asyncio
 import os
 from EdgeGPT import Chatbot, ConversationStyle
+export http_proxy="http://209.141.34.72:4001"
+export https_proxy="http://209.141.34.72:4001"
 async def get_model_reply(prompt,style,cookies,context=[]):
     # combines the new question with a previous context
     context += [prompt]
@@ -11,6 +13,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     # continue the text up to 2048 tokens ~ 8192 charaters
     bot = Chatbot(cookies=cookies)
     raw_data = await bot.ask(prompt, conversation_style=style)
+    await bot.close()
     # print(raw_data)
     response = raw_data["item"]["messages"][1]["text"]
     context += [response]
