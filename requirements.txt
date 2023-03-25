@@ -2,4 +2,4 @@ gradio
 requests
 rich
 websockets
-EdgeGPT0
+EdgeGPT
