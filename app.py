@@ -3,6 +3,11 @@ import json
 import asyncio
 import os
 from EdgeGPT import Chatbot, ConversationStyle
+
+#read cookie from local file
+# with open('./cookies.json', 'r') as f:
+#     cookies = json.load(f)
+
 async def get_model_reply(prompt,style,cookies,context=[]):
     # combines the new question with a previous context
     context += [prompt]
