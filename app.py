@@ -17,7 +17,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     bot = Chatbot(cookies=cookies)
     raw_data = await bot.ask(prompt, conversation_style=style)
     await bot.close()
-    # print(raw_data)
+    print(raw_data)
     response = raw_data["item"]["messages"][1]["text"]
     context += [response]
 
