@@ -28,7 +28,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
         return responses, context
     except:
         try:
-            if reply["item"]["throttling"]["numUserMessagesInConversation"] > reply["item"]["throttling"]["maxNumUserMessagesInConversation"]:
+            if raw_data["item"]["throttling"]["numUserMessagesInConversation"] > reply["item"]["throttling"]["maxNumUserMessagesInConversation"]:
                 response="> **Oops, I think we've reached the end of this conversation. Please reset the bot!**"
                 context += [response]
 
@@ -37,7 +37,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
                 return responses, context
                 
         except:    
-            if reply["item"]["result"]["value"] == "Throttled":
+            if raw_data["item"]["result"]["value"] == "Throttled":
                 response="> **Error: We're sorry, but you've reached the maximum number of messages you can send to Bing in a 24-hour period. Check back later!**"
                 context += [response]
 
