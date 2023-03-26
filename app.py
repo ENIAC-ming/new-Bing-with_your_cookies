@@ -7,7 +7,8 @@ from EdgeGPT import Chatbot, ConversationStyle
 #read cookie from local file
 # with open('./cookies.json', 'r') as f:
 #     cookies = json.load(f)
-
+#如果你是选择读取仓库内的cookie.json文件，那么不需要再向函数内传递cookies参数
+# 也可以删去gr.Tab("Cookies"):这一界面对应的代码
 async def get_model_reply(prompt,style,cookies,context=[]):
     # combines the new question with a previous context
     context += [prompt]
@@ -18,13 +19,31 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     raw_data = await bot.ask(prompt, conversation_style=style)
     await bot.close()
     #print(raw_data)
-    response = raw_data["item"]["messages"][1]["text"]
-    context += [response]
+    try:
+        response = raw_data["item"]["messages"][1]["text"]
+        context += [response]
 
     # list of (user, bot) responses. We will use this format later
-    responses = [(u, b) for u, b in zip(context[::2], context[1::2])]
+        responses = [(u, b) for u, b in zip(context[::2], context[1::2])]
+        return responses, context
+    except:
+        try:
+            if reply["item"]["throttling"]["numUserMessagesInConversation"] > reply["item"]["throttling"]["maxNumUserMessagesInConversation"]:
+                response="> **Oops, I think we've reached the end of this conversation. Please reset the bot!**"
+                context += [response]
 
-    return responses, context
+                # list of (user, bot) responses. We will use this format later
+                responses = [(u, b) for u, b in zip(context[::2], context[1::2])]
+                return responses, context
+                
+        except:    
+            if reply["item"]["result"]["value"] == "Throttled":
+                response="> **Error: We're sorry, but you've reached the maximum number of messages you can send to Bing in a 24-hour period. Check back later!**"
+                context += [response]
+
+                # list of (user, bot) responses. We will use this format later
+                responses = [(u, b) for u, b in zip(context[::2], context[1::2])]
+                return responses, context
 # query = 'Which is the largest country by area in the world?'
 # style="precise"
 # responses, context =asyncio.run(get_model_reply(query,style,context=[]))
