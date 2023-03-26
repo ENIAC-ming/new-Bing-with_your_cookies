@@ -79,6 +79,6 @@ with gr.Blocks() as dialog_app:
         send.click(get_model_reply, [inputs, style, cookies, state], [chatbot, state])
 
 # launches the app in a new local port
-dialog_app.launch()
+dialog_app.launch(share=True)
 # 为网站设置密码防止滥用
 # dialog_app.launch(auth=("admin", "pass1234"))
