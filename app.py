@@ -28,7 +28,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
         return responses, context
     except:
         try:
-            if raw_data["item"]["throttling"]["numUserMessagesInConversation"] > reply["item"]["throttling"]["maxNumUserMessagesInConversation"]:
+            if raw_data["item"]["throttling"]["numUserMessagesInConversation"] > raw_data["item"]["throttling"]["maxNumUserMessagesInConversation"]:
                 response="> **Oops, I think we've reached the end of this conversation. Please reset the bot!**"
                 context += [response]
 
