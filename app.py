@@ -26,7 +26,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
             response = raw_data["item"]["messages"][1]["text"]
         except:
             response = raw_data["item"]["messages"][1]["adaptiveCards"][0]["body"][0]["text"]
-        response = re.sub(r'\[\^.*?\^]', '', response)
+        response = re.sub(r'\^', '', response)
         response = response.rstrip()
         context += [response]
 
