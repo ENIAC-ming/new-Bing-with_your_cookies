@@ -21,7 +21,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     raw_data = await bot.ask(prompt2, conversation_style=style)
     #await bot.close()
     # print(raw_data)
-    response = raw_data["item"]["messages"][1]["text"]
+    
     try:
         response = raw_data["item"]["messages"][1]["text"]
     except:
