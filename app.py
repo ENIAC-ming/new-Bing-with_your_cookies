@@ -2,14 +2,7 @@ import gradio as gr
 import json
 import asyncio
 import os
-import re
 from EdgeGPT import Chatbot, ConversationStyle
-
-#read cookie from local file
-# with open('./cookies.json', 'r') as f:
-#     cookies = json.load(f)
-#如果你是选择读取仓库内的cookie.json文件，那么不需要再向函数内传递cookies参数
-# 也可以删去gr.Tab("Cookies"):这一界面对应的代码
 async def get_model_reply(prompt,style,cookies,context=[]):
     # combines the new question with a previous context
     context += [prompt]
@@ -17,12 +10,11 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     # given the most recent context (4096 characters)
     # continue the text up to 2048 tokens ~ 8192 charaters
     bot = Chatbot(cookies=cookies)
-    #prompt2='\n\n'.join(context)[:4096]
-    raw_data = await bot.ask(prompt, conversation_style=style)
+    prompts='\n\n'.join(context)[:4096]
+    raw_data = await bot.ask(prompts, conversation_style=style)
     #await bot.close()
     # print(raw_data)
     response = raw_data["item"]["messages"][1]["text"]
-    response = response.rstrip()
     context += [response]
 
     # list of (user, bot) responses. We will use this format later
