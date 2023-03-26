@@ -10,8 +10,7 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     # given the most recent context (4096 characters)
     # continue the text up to 2048 tokens ~ 8192 charaters
     bot = Chatbot(cookies=cookies)
-    prompts='\n\n'.join(context)[:4096]
-    raw_data = await bot.ask(prompts, conversation_style=style)
+    raw_data = await bot.ask(prompt, conversation_style=style)
     #await bot.close()
     # print(raw_data)
     response = raw_data["item"]["messages"][1]["text"]
