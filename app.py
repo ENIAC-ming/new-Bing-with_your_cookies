@@ -22,7 +22,6 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     #await bot.close()
     # print(raw_data)
     response = raw_data["item"]["messages"][1]["text"]
-    response = re.sub(r'\^', '', response)
     response = response.rstrip()
     context += [response]
 
