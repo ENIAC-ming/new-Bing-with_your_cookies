@@ -3,6 +3,7 @@ import json
 import asyncio
 import os
 from EdgeGPT import Chatbot, ConversationStyle
+import re
 
 #read cookie from local file
 # with open('./cookies.json', 'r') as f:
@@ -16,11 +17,14 @@ async def get_model_reply(prompt,style,cookies,context=[]):
     # given the most recent context (4096 characters)
     # continue the text up to 2048 tokens ~ 8192 charaters
     bot = Chatbot(cookies=cookies)
-    raw_data = await bot.ask(prompt, conversation_style=style)
+    prompt2='\n\n'.join(context)[:4096]
+    raw_data = await bot.ask(prompt2, conversation_style=style)
     await bot.close()
     #print(raw_data)
     try:
         response = raw_data["item"]["messages"][1]["text"]
+        response = re.sub(r'\[\^.*?\^]', '', response)
+        response = response.rstrip()
         context += [response]
 
     # list of (user, bot) responses. We will use this format later
