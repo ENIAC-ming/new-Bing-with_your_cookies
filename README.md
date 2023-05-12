@@ -9,6 +9,9 @@ app_file: app.py
 pinned: false
 license: other
 ---
+## New-Bing-with Your Cookies
+**This project is forked from [New-Bing-with Your Cookies](https://huggingface.co/spaces/hOTZR/new-Bing-with_your_cookies)**
+
 ## Inspired By:
 - [EdgeGPT](https://github.com/acheong08/EdgeGPT)
 - [DiscordBot-EdgeGPT](https://github.com/FuseFairy/DiscordBot-EdgeGPT)
