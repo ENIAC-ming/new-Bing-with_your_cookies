@@ -9,7 +9,7 @@ app_file: app.py
 pinned: false
 license: other
 ---
-## New-Bing-with Your Cookies
+## A Simple Web to use New Bing Without "Magic"
 **This project is forked from [New-Bing-with Your Cookies](https://huggingface.co/spaces/hOTZR/new-Bing-with_your_cookies)**
 
 ## Inspired By:
